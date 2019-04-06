@@ -1,0 +1,143 @@
+*{
+	padding: 0px;
+	margin: 0px;
+}
+
+header{
+	width: 100%;
+	height: 100px;
+}
+
+
+.main-aside{
+	display: flex;
+}
+
+aside{
+	position: relative;
+	left: 10%;
+	width: 20%;
+	height: 500px;
+	min-width: 200px;
+}
+
+aside input, select{
+	padding-left: 5px;
+	padding-right: 5px;
+	font-size: 1.4em;
+	position: relative;
+	top: 20px;
+	left: 5%;
+	width: 80%;
+	margin-bottom: 5px;
+	height: 30px;
+	border-radius: 5px;
+	border: 2px solid #48D1CC;
+}
+
+aside select{
+	width: 40%;
+	left: 5%;
+	height: 35px;
+}
+
+aside .radioGroup{
+	position: relative;
+	top: 20px;
+	padding-bottom: 15px;
+	border: 2px solid #48D1CC;
+	width: 83%;
+	left: 5%;
+	border-radius: 5px;
+}
+
+aside .radioGroup input{
+	width: 20px;
+	display: block;
+	transform: scale(1.5);
+	text-align: left;
+}
+
+aside .radioGroup label{
+	position: relative;
+	font-size: 1.3em;
+	left: 70px;
+	top: -14px;	
+}
+
+aside .mustHave{
+	position: absolute;
+	left: 92%;
+	margin-top: 25px;
+	font-size: 1.3em;
+	color: red;
+}
+
+aside .addBtn{
+	position: relative;
+	width: 84%;
+	left: 5%;
+	top: 25px;
+	height: 30px;
+	background-color: white-gray;
+	border-radius: 5px;
+	border: 2px solid #48D1CC;
+}
+
+aside .newWin{
+	top: 30px;
+}
+
+aside .addBtn:active{
+	border: 3px solid #48D1CC;
+	background-color: gray;
+}
+
+aside .isCorrect{
+	position: relative;
+	top: 30px;
+	text-align: center;
+	font-size: 2em;
+	color: green;
+}
+
+main{
+	position: relative;
+	left: 10%;
+	width: 50%;
+}
+
+
+main .knifeList{
+	top: 20px;
+	position: relative;
+	border: 2px solid #48D1CC;
+	border-radius: 5px;
+	height: 400px;
+	overflow: auto;
+}
+
+
+main .eachKnife{
+	display: flex;
+}
+
+main .eachKnife div{
+	width: 16.7%;
+	border-bottom: 2px solid #48D1CC;
+	text-align: center;
+	overflow: hidden;
+	height: 27px;
+	font-size: 1.2em;
+	padding-top: 3px;
+	border-right: 2px solid #48D1CC;
+}
+
+main .eachKnife .righttop{
+	border-right: none; 
+}
+
+footer{
+	width: 100%;
+	height: 200px;
+}

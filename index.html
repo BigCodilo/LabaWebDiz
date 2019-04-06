@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href="indexStyle.css" rel="stylesheet">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	</head>
+	<body>
+		<header>
+
+		</header>
+		<div class="main-aside">
+			<aside>
+				<form class="myForm" onsubmit="return addButton()">
+					<input type="text" class="name" name="" placeholder="НАЗВАНИЕ"> <span class="mustHave">*</span>
+					<input type="text" class="firm" name="" placeholder="ПРОИЗВОДИТЕЛЬ"> <span class="mustHave">*</span>
+					<input type="text" class="long" name="" placeholder="ДЛИННА ЛЕЗВИЯ"> <span class="mustHave">*</span>
+					<input type="text" class="price" name="" placeholder="ЦЕНА"> <span class="mustHave">*</span>
+					<select class="select"> 
+						<option value="440A">440А</option> 
+						<option value="440B">440В</option>
+						<option value="440C">440С</option>
+						<option value="420HC">420HC</option>
+						<option value="D2">D2</option>
+					</select>
+					<div class="radioGroup">
+						<input type="radio" class="radio" id="rb1" name="knifeType" checked="true" value="1">
+						<label for="rb1">Монолит</label>
+						<input type="radio" class="radio" id="rb2" name="knifeType" value="2">
+						<label for="rb2">Складной</label>
+					</div>
+					<button class="addBtn" type="submit">Добавить</button>
+				</form>
+				<button class="addBtn newWin" onclick="newWindow()">Вывести список</button>
+				<div class="isCorrect"></div>
+			</aside>
+			<main>
+				<div class="knifeList">
+						<div class="eachKnife">
+							<div>Название</div>
+							<div>Фирма</div>
+							<div>Длинна лезвия</div>
+							<div>Цена</div>
+							<div>Тип</div>
+							<div class="righttop">Сталь</div>
+						</div>
+				</div>
+			</main>
+		</div>
+		<footer>
+			
+		</footer>
+		<script src="js.js"></script>
+	</body>
+</html>
