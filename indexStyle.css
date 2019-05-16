@@ -21,7 +21,7 @@ aside{
 	min-width: 200px;
 }
 
-aside input, select{
+aside input, select, textarea{
 	padding-left: 5px;
 	padding-right: 5px;
 	font-size: 1.4em;
@@ -33,6 +33,11 @@ aside input, select{
 	height: 30px;
 	border-radius: 5px;
 	border: 2px solid #48D1CC;
+}
+
+aside textarea{
+	top: 25px;
+	resize: vertical;
 }
 
 aside select{
@@ -113,7 +118,7 @@ main .knifeList{
 	position: relative;
 	border: 2px solid #48D1CC;
 	border-radius: 5px;
-	height: 400px;
+	height: 443px;
 	overflow: auto;
 }
 

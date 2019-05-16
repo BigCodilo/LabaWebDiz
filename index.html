@@ -1,3 +1,4 @@
+{{define "index"}}
 <!DOCTYPE html>
 <html>
 	<head>
@@ -28,6 +29,7 @@
 						<input type="radio" class="radio" id="rb2" name="knifeType" value="2">
 						<label for="rb2">Складной</label>
 					</div>
+					<textarea class="description"></textarea>
 					<button class="addBtn" type="submit">Добавить</button>
 				</form>
 				<button class="addBtn newWin" onclick="newWindow()">Вывести список</button>
@@ -52,3 +54,4 @@
 		<script src="js.js"></script>
 	</body>
 </html>
+{{end}}
