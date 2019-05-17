@@ -2,23 +2,28 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"html/template"
+	"lab4/models"
 	"net/http"
 
-	"./models"
 	"github.com/gorilla/mux"
 )
 
+var db models.DB
+
 func main() {
+	db = models.DB{}
+	db.Open()
 	r := mux.NewRouter()
 	r.HandleFunc("/index", IndexHandler).Methods("GET")
 	r.HandleFunc("/add", AddHandler).Methods("POST")
+	r.HandleFunc("/knife/{id}", KnifeHandler).Methods("GET")
 
 	r.PathPrefix("/").Handler(http.FileServer(http.Dir("./")))
 
 	http.Handle("/", r)
 	http.ListenAndServe(":1111", nil)
+	db.Close()
 }
 
 //IndexHandler qwerty
@@ -30,6 +35,16 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 func AddHandler(w http.ResponseWriter, r *http.Request) {
 	knife := models.Knife{}
 	json.Unmarshal([]byte(r.FormValue("sendedData")), &knife)
-	fmt.Println(knife)
-	w.Write([]byte("5"))
+	ID := db.AddKnife(knife)
+	w.Write([]byte(ID))
+}
+
+func KnifeHandler(w http.ResponseWriter, r *http.Request) {
+	tmpl, _ := template.ParseFiles("eachKnife.html")
+	tmpl.ExecuteTemplate(w, "knife", nil)
+	vars := mux.Vars(r)
+	ID := vars["id"]
+	knife := db.GetKnife(ID)
+	knifeJSON, _ := json.Marshal(knife)
+	w.Write(knifeJSON)
 }

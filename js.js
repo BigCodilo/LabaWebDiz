@@ -3,7 +3,7 @@ function addButton(){
 	$(".added").remove();
 
 	var Knife = new Object();
-	Knife.ID = 0
+	Knife.ID = ""
 	Knife.Name = $(".name").val();
 	Knife.Firm = $(".firm").val();
 	Knife.Long = $(".long").val();
@@ -75,49 +75,42 @@ function addButton(){
 	}
 
 	if(isName && isPrice && isFirm && isLong){
-		var knifeObject = JSON.stringify(Knife)
-		console.log(knifeObject)
+		var knifeObject = JSON.stringify(Knife);
 		$.ajax({
-			url: "http://localhost:1111/add",
+			//url: "http://localhost:1111/add",
+			url: "http://178.165.101.58:1111/add",
 			method: "POST",
 			data : { sendedData: knifeObject},
 				success : function(data) {
-					alert(data);
+					console.log(data)
 					Knife.ID = data;
+					PrintKnifes(Knife);
 				},
 		});
-		arrayKnife.push(Knife);
-		for(var i = 0; i < arrayKnife.length; i++){
-			$(".isCorrect").text("Добавлено!!!");
-			$(".isCorrect").css("font-size", "2em");
-			$(".isCorrect").css("color", "green");
-			$(".knifeList").append("<div class=\"eachKnife added\">" 
-				+ "<div><a href=" + Knife.ID + ">" + arrayKnife[i].Name + "</a></div>"
-				+ "<div>" + arrayKnife[i].Firm  + "</div>"
-				+ "<div>" + arrayKnife[i].Long  + "</div>"
-				+ "<div>" + arrayKnife[i].Price  + "</div>"
-				+ "<div>" + arrayKnife[i].Type  + "</div>"
-				+ "<div  class=\"righttop\">" + arrayKnife[i].Steel + "</div>"
-			+  "</div>")
-		}
 	} else{
-		for(var i = 0; i < arrayKnife.length; i++){
-			$(".isCorrect").text("Добавлено!!!");
-			$(".isCorrect").css("font-size", "2em");
-			$(".isCorrect").css("color", "green");
-			$(".knifeList").append("<div class=\"eachKnife added\">" 
-				+ "<div><a href=\"1\">" + arrayKnife[i].Name + "</a></div>"
-				+ "<div>" + arrayKnife[i].Firm  + "</div>"
-				+ "<div>" + arrayKnife[i].Long  + "</div>"
-				+ "<div>" + arrayKnife[i].Price  + "</div>"
-				+ "<div>" + arrayKnife[i].Type  + "</div>"
-				+ "<div  class=\"righttop\">" + arrayKnife[i].Steel + "</div>"
-			+  "</div>")
-		}
-		errorHandler(errorString)
+		PrintKnifes("0");
+		errorHandler(errorString);
 	}
-
 	return false
+}
+
+function PrintKnifes(Knife){
+	if(Knife != "0"){
+		arrayKnife.push(Knife);
+	}
+	for(var i = 0; i < arrayKnife.length; i++){
+		$(".isCorrect").text("Добавлено!!!");
+		$(".isCorrect").css("font-size", "2em");
+		$(".isCorrect").css("color", "green");
+		$(".knifeList").append("<div class=\"eachKnife added\">" 
+			+ "<div><a href=\"knife/" + arrayKnife[i].ID + "\">" + arrayKnife[i].Name + "</a></div>"
+			+ "<div>" + arrayKnife[i].Firm  + "</div>"
+			+ "<div>" + arrayKnife[i].Long  + "</div>"
+			+ "<div>" + arrayKnife[i].Price  + "</div>"
+			+ "<div>" + arrayKnife[i].Type  + "</div>"
+			+ "<div  class=\"righttop\">" + arrayKnife[i].Steel + "</div>"
+		+  "</div>")
+	}
 }
 
 var newWin
