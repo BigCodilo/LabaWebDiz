@@ -39,16 +39,18 @@ func (db *DB) AddKnife(knife Knife) string {
 	return ID.Hex()
 }
 
-func (db *DB) GetKnife(ID string) Knife {
-	id, _ := primitive.ObjectIDFromHex(ID)
+func (db *DB) GetKnife(ID string) *Knife {
+	fmt.Println("Pidar:", ID)
+	id, err := primitive.ObjectIDFromHex(ID)
 	collection := db.Client.Database("webdizlaba").Collection("Knifes")
 	knife := Knife{}
 	filter := bson.D{{"_id", id}}
 	collection.FindOne(context.Background(), filter).Decode(&knife)
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
-	return knife
+	if err != nil {
+		log.Println(err)
+		return nil
+	}
+	return &knife
 }
 
 func (db *DB) Close() {

@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"html/template"
 	"lab4/models"
 	"net/http"
@@ -19,10 +20,11 @@ func main() {
 	r.HandleFunc("/add", AddHandler).Methods("POST")
 	r.HandleFunc("/knife/{id}", KnifeHandler).Methods("GET")
 
-	r.PathPrefix("/").Handler(http.FileServer(http.Dir("./")))
+	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
+	//r.PathPrefix("/static").Handler(http.FileServer(http.Dir("./static")))
 
 	http.Handle("/", r)
-	http.ListenAndServe(":1111", nil)
+	http.ListenAndServe(":1234", nil)
 	db.Close()
 }
 
@@ -33,6 +35,7 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func AddHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Here")
 	knife := models.Knife{}
 	json.Unmarshal([]byte(r.FormValue("sendedData")), &knife)
 	ID := db.AddKnife(knife)
@@ -40,11 +43,13 @@ func AddHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func KnifeHandler(w http.ResponseWriter, r *http.Request) {
-	tmpl, _ := template.ParseFiles("eachKnife.html")
-	tmpl.ExecuteTemplate(w, "knife", nil)
 	vars := mux.Vars(r)
 	ID := vars["id"]
 	knife := db.GetKnife(ID)
-	knifeJSON, _ := json.Marshal(knife)
-	w.Write(knifeJSON)
+	if knife == nil {
+		w.Write([]byte("Uncorrct ID"))
+		return
+	}
+	tmpl, _ := template.ParseFiles("eachKnife.html")
+	tmpl.ExecuteTemplate(w, "knife", knife)
 }
